@@ -1,6 +1,15 @@
+import { useState, useEffect, memo } from "react";
 import LastMessage from "./LastMessage";
 
 const Item = ( {room} ) => {
+    const [lastMessage, setLastMessage] = useState('');
+
+    useEffect(() => {
+        if(room.lastMessage){
+            setLastMessage(room.lastMessage.message);
+    }
+    }, [room]); 
+    
     return(
         <div className="py-3 px-3 flex rtl:space-x-reverse hover:bg-gray-100 hover:rounded-lg dark:hover:bg-gray-800 cursor-pointer rounded-lg">
             <div className="flex-shrink-0">
@@ -11,11 +20,11 @@ const Item = ( {room} ) => {
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         {room.name}
                     </p>
-                    <LastMessage room={room} />
+                    <LastMessage lastMessage={lastMessage} />
                 </div>
             </div>
         </div>
     )
 }
 
-export default Item;
+export default memo(Item);
