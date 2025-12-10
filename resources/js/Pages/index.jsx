@@ -1,7 +1,11 @@
+import Settings from '@/Components/Setting';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import List from '@/Components/List/Index';
 
-export default function Welcome({ auth }) {
+export default function Welcome({ auth, data, search }) {
+    console.log(data, auth, search)
+
     return (
         <AuthenticatedLayout>
             <Head title="Hooman Chat" />
@@ -14,13 +18,14 @@ export default function Welcome({ auth }) {
                                     Hooman Chat
                                 </h1>
                                 <div>
-                                    # Settings
+                                    <Settings />
                                 </div>
                             </div>
                             # search #
                         </div>
                         <div className="flex-1 px-4 overflow-y-auto">
-                            # room #
+                            <List title="Rooms" data={data.rooms} />
+                            <List title="Contacts" data={data.contacts} />
                         </div>
                     </div>
                 </div>
